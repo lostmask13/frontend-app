@@ -25,11 +25,10 @@ function ToDoList() {
 		setItems(newItems);
 	}
 
-	const deleteTodo = (index) => {
-		const newItems = [...items];
-		newItems.splice(index, 1);
+	const deleteTodo = (itemIndex) => {
+		const newItems = [...items].filter((item, index) => index !== itemIndex);
 		setItems(newItems);
-	};
+	}
 
 	const deleteAll = () => {
 		setItems([]);
@@ -37,7 +36,7 @@ function ToDoList() {
 
 	return (
 		<div className='root'>
-			<h1>TODO LIST</h1>
+			<h1>TODO LIST1</h1>
 			<div className='input-todo'>
 				<form className="input-group" onSubmit={addItem} >
 					<input onChange={onInputChange} value={input} type="text" className="form-control" placeholder='Input Todo' />
@@ -50,7 +49,9 @@ function ToDoList() {
 			{items?.length > 0 ? (
 				<ul className='todo-list'>
 					<div className='todo' >
-						{items.map((item, index) => <Item key={index} toggle={() => toggleComplete(index)} value={item.value} isDone={item.isDone} />)}
+						{items.map((item, index) => <Item key={index} toggle={() =>
+							toggleComplete(index)} deleteTodo={() => deleteTodo(index)} value={item.value}
+							isDone={item.isDone} />)}
 					</div>
 
 				</ul >
@@ -65,20 +66,18 @@ function ToDoList() {
 		</div >
 	);
 
-	function Item({ value, isDone, toggle }) {
-		return (
-			<li className={`${isDone ? 'done' : ''}`}>
-				<input onChange={toggle} checked={isDone} className="form-check-input me-1" type="checkbox" />
-				{value}
+}
+function Item({ value, isDone, toggle, deleteTodo }) {
+	return (
+		<li className={`${isDone ? 'done' : ''}`}>
+			<input onChange={toggle} checked={isDone} className="form-check-input me-1" type="checkbox" />
+			{value}
 
-				<button className='delete-btn'
-					onClick={() => {
-						deleteTodo(Item);
-					}}
-				>Delete</button>
-			</li>
-		);
-	}
+			<button className='delete-btn'
+				onClick={deleteTodo}
+			>Delete</button>
+		</li>
+	);
 }
 
 export default ToDoList;
