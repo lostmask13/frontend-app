@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import NotificationContext from "./context/NotificationContext";
 
 function TemperatureControl() {
 
 	const [count, setCount] = useState(10);
+	const ctx = useContext(NotificationContext);
 
 	useEffect(() => {
 		document.title = `Now temperature is ${count} °C`
@@ -11,12 +13,14 @@ function TemperatureControl() {
 	const increase = () => {
 		if (count < 30) {
 			setCount(count + 1);
+			ctx.success('Temperature increased by 1 °C');
 		}
 	}
 
 	const decrease = () => {
 		if (count > 0) {
 			setCount(count - 1);
+			ctx.success('Temperature decreased by 1 °C');
 		}
 	}
 
