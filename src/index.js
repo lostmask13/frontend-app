@@ -25,31 +25,31 @@ const StorageToDoList = withLocalStorage('todolist', ToDoList);
 // const StorageTemperatureControl = withLocalStorage('temperaturecontrol', TemperatureControl);
 
 root.render(
-  <React.StrictMode>
-    <NotificationProvider>
-      <NotificationBar />
-      {/* <StorageTemperatureControl /> */}
-      {/* <StorageToDoList /> */}
-      {/* <App /> */}
+    <React.StrictMode>
+        <NotificationProvider>
+            <NotificationBar />
+            {/* <StorageTemperatureControl /> */}
+            {/* <StorageToDoList /> */}
+            {/* <App /> */}
 
-      <BrowserRouter>
-        <Header />
-        <div className='container'>
-          <NotificationBar />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/films'>
-              <Route path=':id' element={<Movie />} />
-            </Route>
-            <Route path='/actors' element={<Actors />} />
-            <Route path='/genres' element={<Genres />} />
-          </Routes>
-        </div>
-        <Footer />
-      </BrowserRouter>
-    </NotificationProvider>
-  </React.StrictMode>
+            <BrowserRouter>
+                <Header />
+                <div className='container'>
+                    <NotificationBar />
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/about' element={<About />} />
+                        <Route path='/films'>
+                            <Route path=':id' element={<Movie />} />
+                        </Route>
+                        <Route path='/actors' element={<Actors />} />
+                        <Route path='/genres' element={<Genres />} />
+                    </Routes>
+                </div>
+                <Footer />
+            </BrowserRouter>
+        </NotificationProvider>
+    </React.StrictMode>
 );
 
 reportWebVitals();
